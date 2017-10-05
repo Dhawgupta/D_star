@@ -23,6 +23,11 @@ if inList(toNode, CLOSED)
     [NEW , OPEN, CLOSED, h, k] = INSERT(toNode, h(toNode(1),toNode(2)), NEW, OPEN, CLOSED, h, k); % in insert the OPEN list is sorted
 end
 
+if inList(fromNode, CLOSED)
+    [NEW , OPEN, CLOSED, h, k] = INSERT(fromNode, h(toNode(1),toNode(2)), NEW, OPEN, CLOSED, h, k);
+end
+
+
 % returning the kmin
 kmin = k(OPEN(1,1), OPEN(1,2));
 
