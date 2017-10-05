@@ -46,10 +46,14 @@ b(goal_node_pos(1), goal_node_pos(2),:) = [6,6];
 % goal_node.b = [5,5];
 
 %%
-OPEN = PriorityQueue();
-node = [-10,-10];
-OPEN.push(inf,node);
-OPEN.push(k(goal_node_pos(1), goal_node_pos(2)), goal_node_pos);
+% OPEN = PriorityQueue();
+% node = [-10,-10];
+% OPEN.push(inf,node);
+% OPEN.push(k(goal_node_pos(1), goal_node_pos(2)), goal_node_pos);
+OPEN = [];
+OPEN = [OPEN; goal_node_pos];
+
+
 %%
 %actions = [1,0; 0,1; -1,0; 0,-1];
 
@@ -59,6 +63,7 @@ actions = [1,0;1,1;0,1;-1,1;-1,0;-1,-1;0,-1;1,-1];
 
 %starts the timer
 tic;
+
 NEW = []; % the new list
 for i = 1:6
     for j = 1:6

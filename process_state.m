@@ -1,12 +1,14 @@
 function [ kmin,NEW,OPEN,CLOSED,h,k,b ] = process_state( NEW,OPEN, CLOSED ,actions,h,k,b, Obs, all_Obs)
 %Process state function to process the state 
 %Top K elemnet
-[node,kmin] = OPEN.pop();
-if kmin == inf && norm(node - [-1,-1]) == 0
+if size(OPEN,1) == 0
     kmin = -1;
     return
     
-end
+node = OPEN(1,:);
+kmin = k(node(1),node(2));
+OPEN = removeList(node, OPEN);
+
 % the first condition 
 if kmin < h(node(1),node(2))
      for i=1:size(actions,1)
@@ -68,8 +70,13 @@ else
      end
 end
 
-[node,kmin] = OPEN.pop();
-OPEN.push(kmin, node);
+
+if size(OPEN,1) == 0
+   kmin = -1
+else
+    kmin = k(OPEN(1,1), OPEN(1,2));
+
+
 return
 
    
