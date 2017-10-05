@@ -6,7 +6,7 @@ function [ Obs, NEW , OPEN, CLOSED,h,k,b] = PREPARE_REPAIR( node , NEW,OPEN, CLO
             [ kmin, Obs , NEW , OPEN , CLOSED,h,k ] = MODIFY_COST(nnode, node, Obs, all_Obs , NEW, OPEN, CLOSED,h,k  );
         end
     end
- 
+   
      %function [ val ] = cost( pto,pfrom,mode,obstacles,all_obstacles ) 
 
 end

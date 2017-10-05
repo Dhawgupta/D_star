@@ -50,7 +50,7 @@ b(goal_node_pos(1), goal_node_pos(2),:) = [6,6];
 % node = [-10,-10];
 % OPEN.push(inf,node);
 % OPEN.push(k(goal_node_pos(1), goal_node_pos(2)), goal_node_pos);
-%OPEN = [];
+OPEN = [];
 %OPEN = [OPEN; goal_node_pos];
 
 
@@ -63,8 +63,7 @@ actions = [1,0;1,1;0,1;-1,1;-1,0;-1,-1;0,-1;1,-1];
 
 %starts the timer
 tic;
-OPEN = [];
-%OPEN = [OPEN; goal_node_pos];
+
 NEW = []; % the new list
 for i = 1:6
     for j = 1:6
@@ -75,32 +74,10 @@ end
 %%
 % to remove an element from list just do CLOSED(j,:) = []
 CLOSED = [];
-%path = goal_node_pos;
+path = goal_node_pos;
 % NEW, OPEN, CLOSED are prepared over here
 % The D* algorithm
-[ NEW,OPEN,CLOSED,h,k ] = INSERT( goal_node_pos, h(goal_node_pos(1),goal_node_pos(2)) ,NEW,OPEN,CLOSED,h,k); % the node(n) and the corresponding H value
-%Xc = init_node_pos
- [ P,NEW, OPEN, CLOSED, h,k,b ] = INIT_PLAN( init_node_pos, goal_node_pos , NEW, OPEN, CLOSED, actions, h,k,b,observation, all_observation);
-if size(P,1) == 0
-    return
-end
-
-node = init_node_pos ;
-while norm(node - goal_node_pos) == 0
-    [ observation, NEW , OPEN, CLOSED,h,k,b] = PREPARE_REPAIR( node , NEW,OPEN, CLOSED ,actions,h,k,b, observation, all_observation );
-    [ P,NEW , OPEN, CLOSED,h,k,b] = REPAIR_REPLAN( node, goal_node_pos , NEW,OPEN, CLOSED ,actions,h,k,b, observation, all_observation );
-    if size(P,1) == 0
-        return
-    end
-    node(1) = P(2,1);
-    node(2) = P(2,2);
-    
-end
-disp("Program Completed : ")    
-disp(node)
-
-
-end
+[ NEW,OPEN,CLOSED,h,k ] = INSERT( n, val ,N,O,C,h,k) % the node(n) and the corresponding H value
 
 
 
