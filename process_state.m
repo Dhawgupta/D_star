@@ -4,7 +4,8 @@ function [ kmin,NEW,OPEN,CLOSED,h,k,b ] = process_state( NEW,OPEN, CLOSED ,actio
 if size(OPEN,1) == 0
     kmin = -1;
     return
-    
+end
+
 node = OPEN(1,:);
 kmin = k(node(1),node(2));
 OPEN = removeList(node, OPEN);
@@ -34,7 +35,7 @@ if kmin == h(node(1),node(2)) % here node is bascailly X
 			% body of if
 			b(nnode(1),nnode(2),1) = node(1);
 			b(nnode(1), nnode(2),2) = node(2);
-            INSERT(nnode, h(node(1), node(2)) + cost(node, nnode, 1, Obs, all_Obs))
+            [NEW,OPEN,CLOSED,h,k] = INSERT(nnode, h(node(1), node(2)) + cost(node, nnode, 1, Obs, all_Obs),NEW,OPEN,CLOSED,h,k);
 			
         end
      end
@@ -48,20 +49,20 @@ else
 			% body of if
 			b(nnode(1),nnode(2),1) = node(1);
 			b(nnode(1), nnode(2),2) = node(2);
-            INSERT(nnode, h(node(1), node(2)) + cost(node, nnode, 1, Obs, all_Obs))
+            [NEW,OPEN,CLOSED,h,k] = INSERT(nnode, h(node(1), node(2)) + cost(node, nnode, 1, Obs, all_Obs),NEW,OPEN,CLOSED,h,k);
 		else
 			if (b(nnode(1), nnode(2),1) ~=  node(1) || b(nnode(1), nnode(2),2) ~= node(2)) && ...
 			   h(nnode(1),nnode(2)) > h(node(1),node(2)) + cost(nnode,node,1, Obs, all_Obs)
 				
 				% body of the function
-				INSERT(node, h(node(1), node(2)))
+				[NEW,OPEN,CLOSED,h,k] = INSERT(node, h(node(1), node(2)),NEW,OPEN,CLOSED,h,k);
 			else
 				if (b(nnode(1), nnode(2),1) ~=  node(1) || b(nnode(1), nnode(2),2) ~= node(2)) && ...
 			        h(node(1),node(2)) > h(nnode(1),nnode(2)) + cost(node,nnode,1, Obs, all_Obs) && ...
 					inList(nnode, CLOSED) && h(nnode(1), nnode(2)) > kmin 
 					
 					% body of the thing
-					INSERT(nnode, h(nnode(1), nnode(2)))
+					[NEW,OPEN,CLOSED,h,k] = INSERT(nnode, h(nnode(1), nnode(2)),NEW,OPEN,CLOSED,h,k);
 					
 				
 				end

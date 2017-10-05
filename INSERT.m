@@ -12,7 +12,7 @@ elseif inList(n, C)
     C = removeList(n,C);
     C = [C;n];
 end
-
+,NEW,OPEN,CLOSED,h,k
 h(n(1),n(2)) = val;
 % now we need to sort the open list to make it a Priority Queue
 if size(O,1) == 1
