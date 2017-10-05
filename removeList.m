@@ -1,4 +1,4 @@
-function [ list, tf ] = removeList( coordinate , list )
+function [ list ] = removeList( coordinate , list )
 % remove a coordinate from a list
 is_true = false;
             for j=1:size(list,1)
@@ -8,7 +8,7 @@ is_true = false;
 					break;
                 end
             end
-       tf = is_true;
+       %tf = is_true;
 
 end
 

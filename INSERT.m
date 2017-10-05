@@ -12,11 +12,14 @@ elseif inList(n, C)
     C = removeList(n,C);
     C = [C;n];
 end
-,NEW,OPEN,CLOSED,h,k
+%NEW,OPEN,CLOSED,h,k
 h(n(1),n(2)) = val;
 % now we need to sort the open list to make it a Priority Queue
 if size(O,1) == 1
+    disp("Error in the program at INSERT")
     return
+end
+
 % sorting the open list 
 
 for i = 1:size(O,1)-1
