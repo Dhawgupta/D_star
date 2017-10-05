@@ -1,0 +1,1 @@
+To run A-star algorithm the main file is as.m
